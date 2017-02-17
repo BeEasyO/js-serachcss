@@ -14,17 +14,13 @@ fs.readFile('read.js', 'utf8', function (err,data) {
   myString = myString.replace(/\r|\n|\\/g,'');
   var split = myString.split(/"/);
   var uniqueArray = uniq(split);
-  uniqueArray.forEach(function(item, i, arr){
-    if(arr[i].search(/[\(\)]/)>=0){
-      arr=arr.splice(i, 1);
-      // console.log(i);
-    }
+  uniqueArray = uniqueArray.filter(function(current){
+    if(current.search(/[\(\)]/)<0)
+      return current;
   });
   console.log(uniqueArray);
   uniqueArray.forEach(function(item, i, arr){
   		arr[i]=item.split(' ');
   		arr[i] = uniq(arr[i]);
   });
-  
-  // console.log(uniqueArray);
 });
