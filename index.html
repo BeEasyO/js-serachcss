@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script> -->
+	<!-- <script type="text/javascript" src="file.js"></script> -->
+</head>
+<body>
+<button id="news">Click me</button>
+<form action="">
+	<label for="find_this"></label>
+	<input id="find_this" type="url">
+	<input type="submit" value="Загрузить">
+</form>
+<div id="content" style="margin-top: 50px;"></div>
+ 
+<script>
+$('#news').click(function()
+{
+ 
+    var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+
+var xhr = new XHR();
+xhr.withCredentials = true;
+
+// (2) запрос на другой домен :)
+xhr.open('GET', 'http://hayageek.com/cross-domain-ajax-request-jquery/', true);
+
+xhr.onload = function() {
+  console.log( this.responseText );
+}
+
+xhr.onerror = function() {
+  alert( 'Ошибка ' + this.status );
+}
+
+xhr.send();
+});
+</script>
+</body>
+</html>
